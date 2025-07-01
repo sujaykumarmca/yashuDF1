@@ -1,0 +1,9 @@
+{
+	"name": "BSKGitDataFactory",
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "de4e6394-c7c4-4a26-9245-5acf9ec48472",
+		"tenantId": "18530ea1-7283-43e3-ab8c-e55648059685"
+	}
+}
