@@ -50,17 +50,45 @@
 				"inputs": [
 					{
 						"referenceName": "DS_2_csv",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"country": {
+								"value": "@pipeline().parameters.country",
+								"type": "Expression"
+							},
+							"playertype": {
+								"value": "@pipeline().parameters.playertype",
+								"type": "Expression"
+							}
+						}
 					}
 				],
 				"outputs": [
 					{
 						"referenceName": "DS_2_STRG_ACT_Output",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"country": {
+								"value": "@pipeline().parameters.country",
+								"type": "Expression"
+							},
+							"playertype": {
+								"value": "@pipeline().parameters.playertype",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			}
 		],
+		"parameters": {
+			"country": {
+				"type": "string"
+			},
+			"playertype": {
+				"type": "string"
+			}
+		},
 		"annotations": []
 	}
 }
