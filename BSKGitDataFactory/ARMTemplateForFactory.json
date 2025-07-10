@@ -270,7 +270,7 @@
 					"location": {
 						"type": "AzureBlobFSLocation",
 						"fileName": {
-							"value": "@concat(dataset().country,'.','dataset().playertype','_output.csv')",
+							"value": "@concat(dataset().country,'.',dataset().playertype,'_output.csv')",
 							"type": "Expression"
 						},
 						"folderPath": "2",
@@ -312,7 +312,7 @@
 					"location": {
 						"type": "AzureBlobFSLocation",
 						"fileName": {
-							"value": "@concat(dataset().country,'.','dataset().playertype','.csv')",
+							"value": "@concat(dataset().country,'.',dataset().playertype,'.csv')",
 							"type": "Expression"
 						},
 						"folderPath": "ANNU/2",
