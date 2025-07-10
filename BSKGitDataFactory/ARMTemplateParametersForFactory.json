@@ -1,0 +1,27 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "BSKGitDataFactory"
+		},
+		"AZ_STRG_Gen2_LS_accountKey": {
+			"value": ""
+		},
+		"Azure_SQL_Third_DB_password": {
+			"value": ""
+		},
+		"AZ_STRG_Gen2_LS_properties_typeProperties_url": {
+			"value": "https://yashustrgact1.dfs.core.windows.net/"
+		},
+		"Azure_SQL_Third_DB_properties_typeProperties_server": {
+			"value": "yashhita.database.windows.net"
+		},
+		"Azure_SQL_Third_DB_properties_typeProperties_database": {
+			"value": "third"
+		},
+		"Azure_SQL_Third_DB_properties_typeProperties_userName": {
+			"value": "yashita"
+		}
+	}
+}

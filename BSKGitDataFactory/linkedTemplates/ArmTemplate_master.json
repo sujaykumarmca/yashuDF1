@@ -1,0 +1,84 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "BSKGitDataFactory"
+		},
+		"AZ_STRG_Gen2_LS_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AZ_STRG_Gen2_LS'"
+		},
+		"Azure_SQL_Third_DB_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Azure_SQL_Third_DB'"
+		},
+		"AZ_STRG_Gen2_LS_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://yashustrgact1.dfs.core.windows.net/"
+		},
+		"Azure_SQL_Third_DB_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "yashhita.database.windows.net"
+		},
+		"Azure_SQL_Third_DB_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "third"
+		},
+		"Azure_SQL_Third_DB_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "yashita"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "BSKGitDataFactory_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AZ_STRG_Gen2_LS_accountKey": {
+						"value": "[parameters('AZ_STRG_Gen2_LS_accountKey')]"
+					},
+					"Azure_SQL_Third_DB_password": {
+						"value": "[parameters('Azure_SQL_Third_DB_password')]"
+					},
+					"AZ_STRG_Gen2_LS_properties_typeProperties_url": {
+						"value": "[parameters('AZ_STRG_Gen2_LS_properties_typeProperties_url')]"
+					},
+					"Azure_SQL_Third_DB_properties_typeProperties_server": {
+						"value": "[parameters('Azure_SQL_Third_DB_properties_typeProperties_server')]"
+					},
+					"Azure_SQL_Third_DB_properties_typeProperties_database": {
+						"value": "[parameters('Azure_SQL_Third_DB_properties_typeProperties_database')]"
+					},
+					"Azure_SQL_Third_DB_properties_typeProperties_userName": {
+						"value": "[parameters('Azure_SQL_Third_DB_properties_typeProperties_userName')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
