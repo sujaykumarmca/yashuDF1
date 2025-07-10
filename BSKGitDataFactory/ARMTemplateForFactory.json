@@ -37,7 +37,7 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
+			"name": "[concat(parameters('factoryName'), '/1_STRG_ACT_File_name_TIme_Append')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -108,6 +108,109 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/2_Copy_File_From_One_Folder_to_Another_Folder')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "DS_2_csv",
+								"type": "DatasetReference",
+								"parameters": {
+									"country": {
+										"value": "@pipeline().parameters.country",
+										"type": "Expression"
+									},
+									"playertype": {
+										"value": "@pipeline().parameters.playertype",
+										"type": "Expression"
+									}
+								}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DS_2_STRG_ACT_Output",
+								"type": "DatasetReference",
+								"parameters": {
+									"country": {
+										"value": "@pipeline().parameters.country",
+										"type": "Expression"
+									},
+									"playertype": {
+										"value": "@pipeline().parameters.playertype",
+										"type": "Expression"
+									}
+								}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"parameters": {
+					"country": {
+						"type": "string"
+					},
+					"playertype": {
+						"type": "string"
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/DS_2_csv')]",
+				"[concat(variables('factoryId'), '/datasets/DS_2_STRG_ACT_Output')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/Azure_SQL_Third_DB')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -142,6 +245,88 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/Azure_SQL_Third_DB')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_2_STRG_ACT_Output')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AZ_STRG_Gen2_LS",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"country": {
+						"type": "string"
+					},
+					"playertype": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@concat(dataset().country,'.','dataset().playertype','_output.csv')",
+							"type": "Expression"
+						},
+						"folderPath": "2",
+						"fileSystem": "output-data"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AZ_STRG_Gen2_LS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_2_csv')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AZ_STRG_Gen2_LS",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"country": {
+						"type": "string",
+						"defaultValue": "inda"
+					},
+					"playertype": {
+						"type": "string",
+						"defaultValue": "batasman"
+					}
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@concat(dataset().country,'.','dataset().playertype','.csv')",
+							"type": "Expression"
+						},
+						"folderPath": "ANNU/2",
+						"fileSystem": "input-data"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AZ_STRG_Gen2_LS')]"
 			]
 		},
 		{
