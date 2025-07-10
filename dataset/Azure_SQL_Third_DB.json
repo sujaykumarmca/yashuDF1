@@ -1,0 +1,32 @@
+{
+	"name": "Azure_SQL_Third_DB",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Azure_SQL_Third_DB",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "cost",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "monthOfYear",
+				"type": "varchar"
+			},
+			{
+				"name": "RevenueTillDate",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "MonthRevenueTillDate"
+		}
+	}
+}

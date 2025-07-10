@@ -1,0 +1,27 @@
+{
+	"name": "DS_STRG_CSV_1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AZ_STRG_Gen2_LS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@concat('MonthRevenueTillDate_Starting',adddays(startOfMonth(utcNow()),-1,'ddMMYYYY'),'_Ending',formatDateTime(utcNow(),'ddMMYYYY'),'.csv')",
+					"type": "Expression"
+				},
+				"folderPath": "ANNU",
+				"fileSystem": "input-data"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
