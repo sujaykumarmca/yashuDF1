@@ -1,0 +1,37 @@
+{
+	"name": "DS_2_csv",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AZ_STRG_Gen2_LS",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"country": {
+				"type": "string",
+				"defaultValue": "inda"
+			},
+			"playertype": {
+				"type": "string",
+				"defaultValue": "batasman"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@concat(dataset().country,'.','dataset().playertype','.csv')",
+					"type": "Expression"
+				},
+				"folderPath": "ANNU/2",
+				"fileSystem": "input-data"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}

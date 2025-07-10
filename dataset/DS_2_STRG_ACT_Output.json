@@ -1,0 +1,35 @@
+{
+	"name": "DS_2_STRG_ACT_Output",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AZ_STRG_Gen2_LS",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"country": {
+				"type": "string"
+			},
+			"playertype": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@concat(dataset().country,'.','dataset().playertype','_output.csv')",
+					"type": "Expression"
+				},
+				"folderPath": "2",
+				"fileSystem": "output-data"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
