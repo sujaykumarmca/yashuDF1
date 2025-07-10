@@ -1,5 +1,5 @@
 {
-	"name": "pipeline1",
+	"name": "1_STRG_ACT_File_name_TIme_Append",
 	"properties": {
 		"activities": [
 			{
