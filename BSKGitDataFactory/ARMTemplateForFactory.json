@@ -159,7 +159,7 @@
 					"location": {
 						"type": "AzureBlobFSLocation",
 						"fileName": {
-							"value": "@concat('MonthRevenueTillDate_Starting',adddays(startOfMonth(utcNow()),-1,'ddMMYYYY'),'_Ending',formatDateTime(utcNow(),'ddMMYYYY'),'.csv')",
+							"value": "@concat('MonthRevenueTillDate_Starting',adddays(startOfMonth(utcNow()),-1,'ddMMyyyy'),'_Ending',formatDateTime(utcNow(),'ddMMyyyy'),'.csv')",
 							"type": "Expression"
 						},
 						"folderPath": "ANNU",
