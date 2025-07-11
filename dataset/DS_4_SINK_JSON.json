@@ -1,0 +1,28 @@
+{
+	"name": "DS_4_SINK_JSON",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AZ_STRG_Gen2_LS",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"filename": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().filename",
+					"type": "Expression"
+				},
+				"folderPath": "4",
+				"fileSystem": "output-data"
+			}
+		},
+		"schema": {}
+	}
+}
