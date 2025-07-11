@@ -122,7 +122,13 @@
 							"outputs": [
 								{
 									"referenceName": "DS_4_SINK_JSON",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"filename": {
+											"value": "@item().name",
+											"type": "Expression"
+										}
+									}
 								}
 							]
 						}
